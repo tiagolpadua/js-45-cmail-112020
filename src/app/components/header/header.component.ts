@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
         './header-search.css'
     ]
 })
-export class HeaderComponent { }
+export class HeaderComponent {
+    private _isMenuOpen = false;
+    get isMenuOpen(): boolean {
+        return this._isMenuOpen;
+    }
+    toggleMenu(): void {
+        this._isMenuOpen = !this.isMenuOpen;
+    }
+}
