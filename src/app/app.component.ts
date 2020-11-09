@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'cmail-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'cmail';
+  private _isNewEmailFormOpen = false;
+  get isNewEmailFormOpen(): boolean {
+    return this._isNewEmailFormOpen;
+  }
+  toggleNewEmailForm(): void {
+    this._isNewEmailFormOpen = !this.isNewEmailFormOpen;
+  }
 }
