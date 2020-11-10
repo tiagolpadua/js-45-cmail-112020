@@ -15,7 +15,7 @@ export class CaixaDeEntradaComponent {
     destinatario: '',
     assunto: '',
     conteudo: ''
-  }
+  };
 
   get isNewEmailFormOpen(): boolean {
     return this._isNewEmailFormOpen;
