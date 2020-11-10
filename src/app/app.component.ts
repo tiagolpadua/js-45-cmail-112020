@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'cmail-root',
@@ -24,13 +25,16 @@ export class AppComponent {
     this._isNewEmailFormOpen = !this.isNewEmailFormOpen;
   }
 
-  handleNewEmail(event: Event): void {
-    event.preventDefault();
+  handleNewEmail(formEmail: NgForm): void {
+    if (formEmail.invalid) {
+      return;
+    }
     this.emailList.push(this.email);
     this.email = {
       destinatario: '',
       assunto: '',
       conteudo: ''
     };
+    formEmail.reset();
   }
 }
