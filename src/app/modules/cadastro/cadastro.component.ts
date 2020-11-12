@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'cmail-cadastro',
   templateUrl: './cadastro.component.html',
@@ -8,11 +8,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class CadastroComponent implements OnInit {
 
   formCadastro = new FormGroup({
-    nome: new FormControl(),
-    username: new FormControl(),
-    senha: new FormControl(),
+    nome: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    senha: new FormControl('', [Validators.required]),
     avatar: new FormControl(),
-  });
+  })
 
   constructor() {
   }
@@ -23,8 +23,17 @@ export class CadastroComponent implements OnInit {
   handleCadastrarUsuario(): void {
     if (this.formCadastro.valid) {
       console.log(this.formCadastro.value);
-    } else {
-      console.log('Campos precisam ser preenchidos!');
+      this.formCadastro.reset();
     }
+    else {
+      this.validarTodosOsCamposDoFormulario(this.formCadastro);
+    }
+  }
+
+  validarTodosOsCamposDoFormulario(form: FormGroup): void {
+    Object.keys(form.controls).forEach(field => {
+      const control = form.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
   }
 }
