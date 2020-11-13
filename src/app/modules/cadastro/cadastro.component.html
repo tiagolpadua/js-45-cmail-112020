@@ -6,7 +6,35 @@
         <form [formGroup]="formCadastro" (ngSubmit)="handleCadastrarUsuario()">
           <cmail-form-group [campo]="formCadastro.get('nome')">
             <input formControlName="nome" autofocus required type="text" name="nome" cmailFormField>
-            <span class="mdl-textfield__error">Informar um nome é obrigatório!</span>
+            <!-- se tiver erros, entao... -->
+            <div *ngIf="formCadastro.get('nome').errors">
+              <!-- errors.required... -->
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('nome').errors.required">
+                Informar um nome é obrigatório!
+              </span>
+              <!-- errors.minlength... -->
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('nome').errors.minlength">
+                Você preencheu {{ formCadastro.get('nome').errors.minlength.actualLength }} caracteres
+                de {{ formCadastro.get('nome').errors.minlength.requiredLength }}
+              </span>
+            </div>
+          </cmail-form-group>
+          <cmail-form-group [campo]="formCadastro.get('telefone')">
+            <input formControlName="telefone" required type="text" name="telefone" cmailFormField>
+            <div *ngIf="formCadastro.get('telefone').errors">
+              <cmail-mensagem-erro *ngIf="formCadastro.get('telefone').errors.required">
+                Informar um telefone é obrigatório!
+              </cmail-mensagem-erro>
+
+              <!--
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('telefone').errors.required">
+                Informar um telefone é obrigatório!
+              </span>
+              -->
+              <span class="mdl-textfield__error" *ngIf="formCadastro.get('telefone').errors.pattern">
+                O telefone deve conter 8 ou 9 números.
+              </span>
+            </div>
           </cmail-form-group>
           <cmail-form-group [campo]="formCadastro.get('username')">
             <input formControlName="username" required type="text" name="username" cmailFormField>

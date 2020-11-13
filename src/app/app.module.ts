@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { CadastroComponent } from './modules/cadastro/cadastro.component';
 import { CaixaDeEntradaComponent } from './modules/caixa-de-entrada/caixa-de-entrada.component';
 import { LoginComponent } from './modules/login/login.component';
+import { MensagemErroComponent } from './components/mensagem-erro/mensagem-erro.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { LoginComponent } from './modules/login/login.component';
     LoginComponent,
     CadastroComponent,
     CmailFormGroupComponent,
-    CmailFormFieldDirective
+    CmailFormFieldDirective,
+    MensagemErroComponent
   ],
   imports: [
     BrowserModule,
