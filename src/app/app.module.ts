@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,10 +7,11 @@ import { ModuloRoteamento } from './app.routes';
 import { CmailFormFieldDirective } from './components/cmail-form-group/cmail-form-field.directive';
 import { CmailFormGroupComponent } from './components/cmail-form-group/cmail-form-group.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MensagemErroComponent } from './components/mensagem-erro/mensagem-erro.component';
 import { CadastroComponent } from './modules/cadastro/cadastro.component';
 import { CaixaDeEntradaComponent } from './modules/caixa-de-entrada/caixa-de-entrada.component';
 import { LoginComponent } from './modules/login/login.component';
-import { MensagemErroComponent } from './components/mensagem-erro/mensagem-erro.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { MensagemErroComponent } from './components/mensagem-erro/mensagem-erro.
     BrowserModule,
     FormsModule,
     ModuloRoteamento,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

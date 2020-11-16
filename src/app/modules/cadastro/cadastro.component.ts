@@ -1,5 +1,8 @@
+import { HttpClient, HttpResponseBase } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 @Component({
   selector: 'cmail-cadastro',
   templateUrl: './cadastro.component.html',
@@ -11,11 +14,25 @@ export class CadastroComponent implements OnInit {
     nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
     username: new FormControl('', [Validators.required]),
     senha: new FormControl('', [Validators.required]),
-    telefone: new FormControl('', [Validators.required, Validators.pattern('[0-9]{4}-?[0-9]{4}[0-9]?')]),
-    avatar: new FormControl(),
+    telefone: new FormControl('', [Validators.required, Validators.pattern('[0-9]{4}-?[0-9]{4}[0-9]? ')]),
+    avatar: new FormControl('', [Validators.required], this.validaImagem.bind(this))
   });
 
-  constructor() {
+  constructor(private httpClient: HttpClient) { }
+
+  validaImagem(campoDoFormulario: FormControl): Observable<any> {
+    return this.httpClient
+      .head(campoDoFormulario.value, {
+        observe: 'response'
+      })
+      .pipe(
+        map((response: HttpResponseBase) => {
+          return response.ok ? null : { urlInvalida: true };
+        }),
+        catchError((error) => {
+          return [{ urlInvalida: true }];
+        })
+      );
   }
 
   ngOnInit(): void {
