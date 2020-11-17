@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CMailFormModule } from 'src/app/components/cmail-form-group/cmail-form.module';
 import { SharedComponentModule } from 'src/app/components/shared-components.module';
+import { CadastroRoutingModule } from './cadastro-routing.module';
 import { CadastroComponent } from './cadastro.component';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CadastroComponent } from './cadastro.component';
         ReactiveFormsModule,
         HttpClientModule,
         SharedComponentModule,
-        CMailFormModule
+        CMailFormModule,
+        CadastroRoutingModule
     ],
 })
 
