@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'cmail-list-item',
@@ -11,8 +11,15 @@ export class CmailListItemComponent implements OnInit {
   @Input() assunto = '';
   @Input() introducaoDoConteudo = '';
   @Input() dataDeEnvio = '';
+  @Output() eventoVaiRemover = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void { }
+
+  removeEmail(click: Event): void {
+    if (confirm('Tem certeza?')) {
+      this.eventoVaiRemover.emit({ status: 'removing' });
+    }
+  }
 }
