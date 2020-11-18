@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
+import { PageDataService } from 'src/app/services/page.service';
 
 @Component({
   selector: 'cmail-caixa-de-entrada',
@@ -26,16 +27,19 @@ export class CaixaDeEntradaComponent implements OnInit {
   };
 
   // Injetar EmailService
-  constructor(private emailService: EmailService) { }
+  constructor(private emailService: EmailService, private pageDataService: PageDataService) { }
 
   ngOnInit(): void {
     this.emailService
       .listar()
       .subscribe(
-        lista => {
+        (lista) => {
           this.emailList = lista;
-        }
-      );
+        });
+
+    // Definimos o titulo da página.
+    this.pageDataService
+      .defineTitulo('Caixa de entrada - CMail');
   }
 
   get isNewEmailFormOpen(): boolean {
@@ -76,7 +80,7 @@ export class CaixaDeEntradaComponent implements OnInit {
             this.emailList = this.emailList.filter(email => email.id !== emailId);
           }
           , err => console.error(err)
-        )
+        );
     }
   }
 }
