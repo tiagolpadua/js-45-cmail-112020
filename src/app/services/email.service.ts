@@ -48,7 +48,7 @@ export class EmailService {
                   destinatario: emailApi.to,
                   assunto: emailApi.subject,
                   conteudo: emailApi.content,
-                  dataDeEnvio: emailApi.created_at
+                  dataDeEnvio: emailApi.createdAt
                 })
               );
           }
