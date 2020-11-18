@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
+import { HeaderDataService } from 'src/app/services/header.service';
 import { PageDataService } from 'src/app/services/page.service';
 
 @Component({
@@ -20,6 +21,8 @@ export class CaixaDeEntradaComponent implements OnInit {
 
   emailList = [];
 
+  termoParaFiltro: string;
+
   email = {
     destinatario: '',
     assunto: '',
@@ -27,7 +30,7 @@ export class CaixaDeEntradaComponent implements OnInit {
   };
 
   // Injetar EmailService
-  constructor(private emailService: EmailService, private pageDataService: PageDataService) { }
+  constructor(private emailService: EmailService, private pageDataService: PageDataService, private headerService: HeaderDataService) { }
 
   ngOnInit(): void {
     this.emailService
@@ -40,6 +43,10 @@ export class CaixaDeEntradaComponent implements OnInit {
     // Definimos o titulo da página.
     this.pageDataService
       .defineTitulo('Caixa de entrada - CMail');
+
+    this.headerService
+      .valorDoFiltro
+      .subscribe(novoValor => this.termoParaFiltro = novoValor);
   }
 
   get isNewEmailFormOpen(): boolean {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeaderDataService } from 'src/app/services/header.service';
 import { PageDataService } from 'src/app/services/page.service';
 @Component({
     selector: 'cmail-header',
@@ -14,7 +15,7 @@ export class HeaderComponent {
 
     private _isMenuOpen = false;
 
-    constructor(private pageService: PageDataService) {
+    constructor(private pageService: PageDataService, private headerService: HeaderDataService) {
         // Assinando titulo de PageDataService.
         this.pageService
             .titulo
@@ -27,5 +28,9 @@ export class HeaderComponent {
 
     toggleMenu(): void {
         this._isMenuOpen = !this.isMenuOpen;
+    }
+
+    handleBuscaChanges({ target }): void {
+        this.headerService.atualizarTermoDeFiltro(target.value);
     }
 }
