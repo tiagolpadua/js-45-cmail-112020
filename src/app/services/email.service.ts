@@ -35,4 +35,24 @@ export class EmailService {
         )
       );
   }
+
+  listar(): Observable<Email[]> {
+    return this.http
+      .get(this.api, { headers: this.cabecalho })
+      .pipe<Email[]>(
+        map(
+          (response: any[]) => {
+            return response
+              .map(
+                emailApi => new Email({
+                  destinatario: emailApi.to,
+                  assunto: emailApi.subject,
+                  conteudo: emailApi.content,
+                  dataDeEnvio: emailApi.created_at
+                })
+              );
+          }
+        )
+      );
+  }
 }

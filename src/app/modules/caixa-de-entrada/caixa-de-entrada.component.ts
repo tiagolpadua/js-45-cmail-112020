@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
 
@@ -13,7 +13,7 @@ import { EmailService } from 'src/app/services/email.service';
     }
   `]
 })
-export class CaixaDeEntradaComponent {
+export class CaixaDeEntradaComponent implements OnInit {
 
   private _isNewEmailFormOpen = false;
 
@@ -27,6 +27,16 @@ export class CaixaDeEntradaComponent {
 
   // Injetar EmailService
   constructor(private emailService: EmailService) { }
+
+  ngOnInit(): void {
+    this.emailService
+      .listar()
+      .subscribe(
+        lista => {
+          this.emailList = lista;
+        }
+      );
+  }
 
   get isNewEmailFormOpen(): boolean {
     return this._isNewEmailFormOpen;
