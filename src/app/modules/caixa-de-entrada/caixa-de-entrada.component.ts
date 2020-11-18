@@ -5,7 +5,13 @@ import { EmailService } from 'src/app/services/email.service';
 @Component({
   selector: 'cmail-caixa-de-entrada',
   templateUrl: './caixa-de-entrada.component.html',
-  styles: []
+  styles: [`
+      ul, li {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+  `]
 })
 export class CaixaDeEntradaComponent {
 
