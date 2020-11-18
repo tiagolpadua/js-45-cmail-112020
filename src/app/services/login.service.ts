@@ -13,7 +13,7 @@ export class LoginService {
       .post(this.api, dadosLogin)
       .pipe(
         map((response: any) => {
-          localStorage.setItem('TOKEN', response.token);
+          localStorage.setItem('cmail-token', response.token);
           return response;
         })
       );
